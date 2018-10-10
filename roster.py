@@ -1,3 +1,8 @@
+'''
+This application reads JSON file that contains information about members(students) and courses taken and
+populates it int a database
+'''
+
 import json
 import sqlite3
 
@@ -28,6 +33,7 @@ CREATE TABLE Member (
 )
 ''')
 
+
 fname = input('Enter file name: ')
 if len(fname) < 1:
     fname = 'roster_data_sample.json'
@@ -36,6 +42,7 @@ if len(fname) < 1:
 #   [ "Charley", "si110", 1 ],
 #   [ "Mea", "si110", 0 ],
 
+#Open and read JSON file
 str_data = open(fname).read()
 json_data = json.loads(str_data)
 
@@ -45,6 +52,7 @@ for entry in json_data:
     title = entry[1];
     role = entry[2];
 
+#print contents of file to ensure the values have been properly extracted
     print((name, title, role))
 
     cur.execute('''INSERT OR IGNORE INTO User (name)
